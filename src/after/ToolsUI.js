@@ -28,13 +28,14 @@ export class ToolsUI {
         btn.setAttribute('data-tool', selector);
         btn.textContent = name;
         btn.addEventListener('click', () => {
-            this.subscribers.forEach(s => s(selector)) //3. fire the subscribe callback with selector param
+            this.subscribers.forEach(s => s(selector)) //2. fire all 'subscribe' callbacks (functions in array) with selector param
         })
         return btn
     }
-
-    subscribe(subscriber) { //2. in subscriber we have passed function (as an parameter)
-        this.subscribers.push(subscriber) //adding to array
+    //publish/subsribe pattern: https://jsmanifest.com/the-publish-subscribe-pattern-in-javascript/
+    subscribe(subscriber) { //1. as param in subscriber we have function
+        this.subscribers.push(subscriber) //adding function to array of callbacks - we can invoke 'subscribe' method many times with diffrent callbacks
+        //they are stored in array
     }
 
 }

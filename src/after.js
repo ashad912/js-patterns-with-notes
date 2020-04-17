@@ -8,12 +8,13 @@ const tools = new ToolsUI('.js-tools')
 const board = new DrawingBoardUI('.js-canvas', 500, 300)
 const context = new DrawingContextUI('.js-context')
 
-tools.subscribe(selectedTool => { //1. function passed as an argument!! callback
+//subscribe callback was passed at the start of the script, all variables have state from that moment (variables are classes, so we can manipulate its props by classes methods) 
+tools.subscribe(selectedTool => { //3a. function passed as an argument!! first subscribe callback invoked from button listener
     //4. selectedTool is passed from button listener
     const tool = factory.getTool(selectedTool)
     board.changeTool(tool)
 })
 
-tools.subscribe(selectedTool => {
+tools.subscribe(selectedTool => { //3b. second subscribe callback
     context.updateContext(selectedTool)
 })
